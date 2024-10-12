@@ -100,13 +100,15 @@
 
         this.background.draw(this.context, this.offset);
 
+        // Always draw the dinosaur, even when the game is not running
+        this.player.drawColliders(this.context, this.offset);
+        this.player.draw(this.context, this.offset);
+
         for (var i = 0; i < this.cacti.length; i++) {
             this.cacti[i].drawColliders(this.context, this.offset);
             this.cacti[i].draw(this.context, this.offset);
         }
 
-        this.player.drawColliders(this.context, this.offset);
-        this.player.draw(this.context, this.offset);
         this.score.draw(this.context, this.offset);
     };
 
