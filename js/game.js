@@ -35,23 +35,26 @@
         this.running = false;
         this.finished = false;
 
+        // Initialize game objects
         this.initObjects();
+
+        // Draw the initial state of the game
         this.draw();
         requestAnimationFrame(this.step.bind(this));
     }
 
     Game.prototype.initObjects = function() {
-        this.player = new Dinosaur({
-            context: this.context, 
-            left: 10, 
-            bottom: this.canvas.height - GROUND_BUFFER,
-            colour: DEFAULT_COLOUR
-        });
-
         this.background = new Background({
             context: this.context, 
             width: this.canvas.width, 
             height: this.canvas.height,
+            colour: DEFAULT_COLOUR
+        });
+
+        this.player = new Dinosaur({
+            context: this.context, 
+            left: 10, 
+            bottom: this.canvas.height - GROUND_BUFFER,
             colour: DEFAULT_COLOUR
         });
 
@@ -98,6 +101,7 @@
     Game.prototype.draw = function() {
         this.clear();
 
+        // Draw background first
         this.background.draw(this.context, this.offset);
 
         // Always draw the dinosaur, even when the game is not running
