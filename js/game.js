@@ -5,24 +5,24 @@
 	var MAX_TIME_TICK = 1000 / 60;
 	var SCREEN_BUFFER = 50;
 	var GROUND_BUFFER = 10;
-	var SPACE_BAR_CODE = 32;
 	var MIN_CACTUS_DISTANCE = 400;
 
-	var spacePressed = false;
-	function keydown(e) {
-        if (e.keyCode === SPACE_BAR_CODE) {
-			spacePressed = true;
-        }
-    }
+	var touchPressed = false;
 
-    function keyup(e) {
-        if (e.keyCode === SPACE_BAR_CODE) {
-			spacePressed = false;
-        }
-    }
+	// Handle touch events for mobile devices
+	function touchStart(e) {
+		touchPressed = true;
+		e.preventDefault(); // Prevent scrolling or other actions
+	}
 
-	document.addEventListener('keydown', keydown, false);
-	document.addEventListener('keyup', keyup, false);
+	function touchEnd(e) {
+		touchPressed = false;
+		e.preventDefault(); // Prevent scrolling or other actions
+	}
+
+	// Add event listeners for touch start and touch end
+	document.addEventListener('touchstart', touchStart, false);
+	document.addEventListener('touchend', touchEnd, false);
 
 	function Game(options) {
 		this.canvas = options.el;
@@ -132,13 +132,13 @@
 			this.removeOldCacti();
 			this.updateCacti();
 
-			if (!this.player.isJumping(this.offset) && spacePressed) {
+			if (!this.player.isJumping(this.offset) && touchPressed) {
 				this.player.startJump(this.offset);
 			}
 
 			this.checkCactusHit();
 			this.draw();
-		} else if (spacePressed) {
+		} else if (touchPressed) {
 			this.running = true;
 		}
 
