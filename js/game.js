@@ -138,7 +138,9 @@
 
 			this.checkCactusHit();
 			this.draw();
-		} else if (touchPressed) {
+		} 
+		// Start the game by tapping the screen instead of pressing the spacebar
+		else if (touchPressed) {
 			this.running = true;
 		}
 
